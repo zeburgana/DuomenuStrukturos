@@ -20,10 +20,14 @@ public class Game extends Canvas implements Runnable{
     private Thread thread;
 
     private BufferedImage spriteSheet = null;
+    private BufferedImage background = null;
 
     private Player player;
+    private Enemy enemy;
     private Controller controller;
     boolean isShooting = false;
+
+    private Textures tex;
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -47,14 +51,16 @@ public class Game extends Canvas implements Runnable{
         requestFocus();
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("res\\SpriteSheet.png");
+            spriteSheet = loader.loadImage("res/SpriteSheet.png");
+            background = loader.loadImage("res/BackGround.png");
         }catch(IOException e){
             e.printStackTrace();
         }
-
+        tex = new Textures(this);
         addKeyListener(new KeyInput(this));
-        player = new Player(200,200,this);
-        controller = new Controller(this);
+        player = new Player(200,200, tex);
+        enemy=new Enemy(20,20,tex);
+        controller = new Controller(this, tex);
     }
 
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
@@ -113,6 +119,7 @@ public class Game extends Canvas implements Runnable{
     private void tick(){
         player.tick();
         controller.tick();
+//        enemy.tick();
     }
 
     private void render(){
@@ -122,7 +129,12 @@ public class Game extends Canvas implements Runnable{
             return;
         }
         Graphics g = bs.getDrawGraphics();
+
+
         g.drawImage(image, 0, 0, getWidth(),getHeight(),this);
+        g.drawImage(background, 0, 0, null);
+
+
         player.render(g);
         controller.render(g);
 
@@ -134,8 +146,6 @@ public class Game extends Canvas implements Runnable{
         return spriteSheet;
     }
 
-
-
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
 
@@ -146,9 +156,10 @@ public class Game extends Canvas implements Runnable{
             case KeyEvent.VK_DOWN:player.setVelY(3);break;
             case KeyEvent.VK_Z:
                 if(!isShooting)
-                    controller.addBullet(new Bullet(player.getX(), player.getY(),this));
+                    controller.addLaser(new Laser(player.getX(), player.getY(), tex));
                 isShooting = true;
                 break;
+//            case KeyEvent.VK_Q:enemy=new Enemy(20,20,tex);break;
         }
 
     }

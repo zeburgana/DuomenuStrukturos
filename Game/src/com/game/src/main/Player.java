@@ -13,14 +13,13 @@ public class Player {
 
     private double x;
     private double y;       //y is flipped
-    private BufferedImage player;
 
-    public Player(double x, double y, Game game){
+    private Textures tex;
+
+    public Player(double x, double y, Textures tex){
         this.x = x;
         this.y = y;
-
-        SpriteSheet ss = new SpriteSheet(game.getSpriteSheet());
-        player = ss.grabImage(0,0,32,32);
+        this.tex = tex;
     }
 
     public double getX(){
@@ -62,7 +61,7 @@ public class Player {
             y = 480-35;
     }
     public void render(Graphics g){
-        g.drawImage(player, ((int) x),((int) y),null);
+        g.drawImage(tex.player, ((int) x),((int) y),null);
     }
 
 }
