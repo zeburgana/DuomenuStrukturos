@@ -42,6 +42,12 @@ public class Player {
     public void setVelY(double velocity){
         this.velY = velocity;
     }
+    public double getVelX(){
+        return velX;
+    }
+    public double getVelY(){
+        return velY;
+    }
 
     public void tick(){
         x+=velX;
