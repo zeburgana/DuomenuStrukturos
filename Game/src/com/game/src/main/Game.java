@@ -158,16 +158,26 @@ public class Game extends Canvas implements Runnable{
     }
     public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_RIGHT)
-            player.setVelX(0);
-        if(key == KeyEvent.VK_LEFT)
-            player.setVelX(0);
-        if(key == KeyEvent.VK_UP)
-            player.setVelY(0);
-        if(key == KeyEvent.VK_DOWN)
-            player.setVelY(0);
-        if(key == KeyEvent.VK_Z){
-            isShooting = false;
+
+        switch(key){
+            case KeyEvent.VK_RIGHT: player.setVelX(0); break;
+            case KeyEvent.VK_LEFT: player.setVelX(0); break;
+            case KeyEvent.VK_UP: player.setVelY(0); break;
+            case KeyEvent.VK_DOWN: player.setVelY(0); break;
+            case KeyEvent.VK_Z: isShooting = false; break;
+        }
+
+
+//        if(key == KeyEvent.VK_RIGHT)
+//            player.setVelX(0);
+//        if(key == KeyEvent.VK_LEFT)
+//            player.setVelX(0);
+//        if(key == KeyEvent.VK_UP)
+//            player.setVelY(0);
+//        if(key == KeyEvent.VK_DOWN)
+//            player.setVelY(0);
+//        if(key == KeyEvent.VK_Z){
+//            isShooting = false;
         }
     }
 }
