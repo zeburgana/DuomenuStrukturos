@@ -20,7 +20,7 @@ public class Controller {
         this.game = game;
         this.tex = tex;
 
-        for(int x =20;x<(Game.WIDTH *Game.SCALE);x+=80){
+        for(int x =30;x<(Game.WIDTH *Game.SCALE);x+=64){
             addEnemy(new Enemy(x,0,tex));
         }
     }
