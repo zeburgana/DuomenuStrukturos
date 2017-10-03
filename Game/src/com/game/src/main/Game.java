@@ -134,50 +134,47 @@ public class Game extends Canvas implements Runnable{
         return spriteSheet;
     }
 
+
+
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_RIGHT)
-            player.setVelX(3);
-        else
-            if(key == KeyEvent.VK_LEFT)
-                player.setVelX(-3);
-        else
-            if(key == KeyEvent.VK_UP)
-                player.setVelY(-3);
-        else
-            if(key == KeyEvent.VK_DOWN)
-                player.setVelY(3);
-        else
-            if(key == KeyEvent.VK_Z)
-            {
+
+        switch(key){
+            case KeyEvent.VK_RIGHT:player.setVelX(3);break;
+            case KeyEvent.VK_LEFT:player.setVelX(-3);break;
+            case KeyEvent.VK_UP:player.setVelY(-3);break;
+            case KeyEvent.VK_DOWN:player.setVelY(3);break;
+            case KeyEvent.VK_Z:
                 if(!isShooting)
                     controller.addBullet(new Bullet(player.getX(), player.getY(),this));
                 isShooting = true;
-            }
+                break;
+        }
 
     }
     public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();
 
         switch(key){
-            case KeyEvent.VK_RIGHT: player.setVelX(0); break;
-            case KeyEvent.VK_LEFT: player.setVelX(0); break;
-            case KeyEvent.VK_UP: player.setVelY(0); break;
-            case KeyEvent.VK_DOWN: player.setVelY(0); break;
-            case KeyEvent.VK_Z: isShooting = false; break;
-        }
-
-
-//        if(key == KeyEvent.VK_RIGHT)
-//            player.setVelX(0);
-//        if(key == KeyEvent.VK_LEFT)
-//            player.setVelX(0);
-//        if(key == KeyEvent.VK_UP)
-//            player.setVelY(0);
-//        if(key == KeyEvent.VK_DOWN)
-//            player.setVelY(0);
-//        if(key == KeyEvent.VK_Z){
-//            isShooting = false;
+            case KeyEvent.VK_RIGHT:
+                if(player.getVelX()>0)
+                    player.setVelX(0);
+                break;
+            case KeyEvent.VK_LEFT:
+                if(player.getVelX()<0)
+                    player.setVelX(0);
+                break;
+            case KeyEvent.VK_UP:
+                if(player.getVelY()<0)
+                    player.setVelY(0);
+                break;
+            case KeyEvent.VK_DOWN:
+                if(player.getVelY()>0)
+                    player.setVelY(0);
+                break;
+            case KeyEvent.VK_Z:
+                isShooting = false;
+                break;
         }
     }
 }
