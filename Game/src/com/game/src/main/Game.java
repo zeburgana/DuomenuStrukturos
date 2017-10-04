@@ -51,15 +51,15 @@ public class Game extends Canvas implements Runnable{
         requestFocus();
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("res/SpriteSheet.png");
-            background = loader.loadImage("res/BackGround.png");
+            spriteSheet = loader.loadImage("C:\\Users\\LapDawg\\Desktop\\DuomenuStrukturos\\Game\\res/SpriteSheet.png");
+            background = loader.loadImage("C:\\Users\\LapDawg\\Desktop\\DuomenuStrukturos\\Game\\res/BackGround.png");
         }catch(IOException e){
             e.printStackTrace();
         }
         tex = new Textures(this);
         addKeyListener(new KeyInput(this));
-        player = new Player(200,200, tex);
-        enemy=new Enemy(20,20,tex);
+        player = new Player(200,200, tex, this);
+        //enemy=new Enemy(20,20,tex);
         controller = new Controller(this, tex);
     }
 
