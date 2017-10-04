@@ -16,10 +16,15 @@ public class Player {
 
     private Textures tex;
 
-    public Player(double x, double y, Textures tex){
+    int HEIGHT, WIDTH, SCALE;
+
+    public Player(double x, double y, Textures tex, Game game){
         this.x = x;
         this.y = y;
         this.tex = tex;
+        HEIGHT = game.HEIGHT;
+        WIDTH = game.WIDTH;
+        SCALE = game.SCALE;
     }
 
     public double getX(){
@@ -53,12 +58,12 @@ public class Player {
         y+=velY;
         if(x <= 0)
             x = 0;
-        if(x >= 640-20)
-            x = 640-20;
+        if(x >= (WIDTH*SCALE)-20)
+            x = (WIDTH*SCALE)-20;
         if(y <= 0)
             y = 0;
-        if(y >= 480-35)
-            y = 480-35;
+        if(y >= (HEIGHT*SCALE)-24)
+            y = (HEIGHT*SCALE)-24;
     }
     public void render(Graphics g){
         g.drawImage(tex.player, ((int) x),((int) y),null);

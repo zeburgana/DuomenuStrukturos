@@ -21,7 +21,7 @@ public class Controller {
         this.tex = tex;
 
         for(int x =30;x<(Game.WIDTH *Game.SCALE);x+=80){
-            addEnemy(new Enemy(x,0,tex));
+            addEnemy(new Enemy(x,0,tex, game));
         }
     }
 
