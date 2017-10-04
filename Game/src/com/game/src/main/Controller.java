@@ -38,12 +38,12 @@ public class Controller {
         }
     }
     public void render(Graphics g){
-        for(Laser laser : lasers){
-            temp = laser;
+        for(int i = 0;i<lasers.size();i++){
+            temp = lasers.get(i);
             temp.render(g);
         }
-        for(Enemy enemy : enemies){
-            Etemp = enemy;
+        for(int i = 0;i<enemies.size();i++){
+            Etemp = enemies.get(i);
             Etemp.render(g);
         }
     }
