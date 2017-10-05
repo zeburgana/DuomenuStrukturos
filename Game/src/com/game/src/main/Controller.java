@@ -14,18 +14,20 @@ public class Controller {
     Entity e;
     EnemyEntity Ee;
     Textures textures;
+    Game game;
 //    Random r = new Random();      //random spawnpoint experimentation
 
-    public Controller(Textures tex){
+    public Controller(Textures tex, Game game){
         textures = tex;
+        this.game = game;
     }
 
     public void createEnemy(int EnemyCount){
         for(int i = 0; i < EnemyCount; i++){
             if(i<=8)
-                addEntity(new Enemy(i*64,0, textures));//r.nextInt(Game.WIDTH)
+                addEntity(new Enemy(i*64,0, textures, game, this));//r.nextInt(Game.WIDTH)
             if(i>8&&i<=18)
-                addEntity(new Enemy(Game.WIDTH*Game.SCALE-(i-7)*64,32, textures));
+                addEntity(new Enemy(Game.WIDTH*Game.SCALE-(i-7)*64,32, textures, game, this));
         }
     }
 

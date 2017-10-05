@@ -12,6 +12,7 @@ public class Laser extends GameObj implements Entity {
 
     private Textures tex;
     private Game game;
+    public Animation animation;
 
     public Laser(double x, double y, Textures tex, Game game) {
 //        this.x = x;
@@ -19,17 +20,15 @@ public class Laser extends GameObj implements Entity {
         super(x,y);
         this.tex = tex;
         this.game = game;
+        animation = new Animation(5,tex.laser[0],tex.laser[1],tex.laser[2],tex.laser[3],tex.laser[4],tex.laser[4]);
     }
 
     public void tick() {
         y -= 10;
-        if(Physx.Collision(this, game.Eent)){
-            System.out.println("Collision");
-        }
     }
 
     public void render(Graphics g) {
-        g.drawImage(tex.laser, (int) x, (int) y, null);
+        g.drawImage(tex.laser[0], (int) x, (int) y, null);
     }
 
     public double getX() {

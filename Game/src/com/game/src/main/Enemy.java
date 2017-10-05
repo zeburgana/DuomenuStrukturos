@@ -1,25 +1,37 @@
 package com.game.src.main;
 
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 import java.util.Random;
 
 /**
  * Created by Pug b0iiiii on 2017-10-03.
  */
 public class Enemy extends GameObj implements EnemyEntity {
-//    double x, y;
-    String direction = "Right";       //true for right lel
+    String direction = "Right";
     private Textures tex;
-    Random r = new Random();
+    Animation animation;
+    Game game;
+    Controller controller;
+
 //    private int speed = r.nextInt(3)+1;   //experimenting with individual speeds
 
-    public Enemy(double x, double y, Textures tex){
+    public Enemy(double x, double y, Textures tex, Game game, Controller controller){
 //        this.x = x;
 //        this.y = y;
         super(x,y);
         this.tex = tex;
+        this.game = game;
+        this.controller = controller;
+        animation = new Animation(1,tex.enemy[0],tex.enemy[3],tex.enemy[2],tex.enemy[1],tex.enemy[2],tex.enemy[3]);
     }
     public void tick(){
+        if(Physx.Collision(this,controller.GetF())){
+            controller.removeEntity(this);
+            animation.runAnimation();
+            animation.renderAnimation(game.getGraphics(),x,y,0);
+            game.setEnemyKilled(game.getEnemyKilled()+1);
+        }
         if(x>=(Game.WIDTH*Game.SCALE)-25){
             direction = "Left";
             y+=32;
@@ -39,7 +51,7 @@ public class Enemy extends GameObj implements EnemyEntity {
 
     }
     public void render(Graphics g){
-        g.drawImage(tex.enemy,(int)x,(int)y,null);
+        g.drawImage(tex.enemy[0],(int)x,(int)y,null);
     }
 
     public double getX() {
