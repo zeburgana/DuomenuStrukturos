@@ -6,15 +6,16 @@ import java.awt.image.BufferedImage;
 /**
  * Created by Pug b0iiiii on 2017-10-02.
  */
-public class Laser {
-    private double x;
-    private double y;
+public class Laser extends GameObj implements Entity {
+//    private double x;
+//    private double y;
 
     private Textures tex;
 
     public Laser(double x, double y, Textures tex) {
-        this.x = x;
-        this.y = y;
+//        this.x = x;
+//        this.y = y;
+        super(x,y);
         this.tex = tex;
     }
 
@@ -26,7 +27,19 @@ public class Laser {
         g.drawImage(tex.laser, (int) x, (int) y, null);
     }
 
-    public double GetY() {
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
         return y;
     }
+
+//    public double GetY() {
+//        return y;
+//    }
+//
+//    public double GetX(){
+//        return x;
+//    }
 }
