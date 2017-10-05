@@ -24,7 +24,7 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage background = null;
 
     private Player player;
-    private int enemyCount = 5;
+    private int enemyCount = 1;
     private int enemyKilled = 0;
     private Controller controller;
     boolean isShooting = false;
@@ -64,9 +64,9 @@ public class Game extends Canvas implements Runnable{
         tex = new Textures(this);
         addKeyListener(new KeyInput(this));
         player = new Player(WIDTH*SCALE/2,HEIGHT*SCALE-25, tex);
-        controller = new Controller(tex);
+        controller = new Controller(tex, this);
 
-        controller.createEnemy(11);
+        controller.createEnemy(enemyCount);
 
         ent = controller.GetF();
         Eent = controller.GetE();
@@ -130,6 +130,11 @@ public class Game extends Canvas implements Runnable{
     private void tick(){
         player.tick();
         controller.tick();
+        if(enemyKilled>=enemyCount){
+            enemyCount+=1;
+            enemyKilled = 0;
+            controller.createEnemy(enemyCount);
+        }
     }
 
     private void render(){

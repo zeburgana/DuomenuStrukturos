@@ -7,7 +7,9 @@ import java.awt.image.BufferedImage;
  */
 public class Textures {
 
-    public BufferedImage player, laser, enemy;
+    public BufferedImage player;
+    public BufferedImage[] enemy = new BufferedImage[4];
+    public BufferedImage[] laser = new BufferedImage[5];
 
 
     private SpriteSheet spriteSheet = null;
@@ -17,7 +19,16 @@ public class Textures {
     }
     private void getTextures(){
         player = spriteSheet.grabImage(0,0,32,32);
-        laser = spriteSheet.grabImage(1,0,32,32);
-        enemy = spriteSheet.grabImage(2,0,32,32);
+
+        laser[0] = spriteSheet.grabImage(1,0,32,32);
+        laser[1] = spriteSheet.grabImage(1,1,32,32);
+        laser[2] = spriteSheet.grabImage(1,2,32,32);
+        laser[3] = spriteSheet.grabImage(1,3,32,32);
+        laser[4] = spriteSheet.grabImage(1,4,32,32);
+
+        enemy[0] = spriteSheet.grabImage(2,0,32,32);
+        enemy[1] = spriteSheet.grabImage(2,1,32,32);
+        enemy[2] = spriteSheet.grabImage(2,2,32,32);
+        enemy[3] = spriteSheet.grabImage(2,3,32,32);
     }
 }
