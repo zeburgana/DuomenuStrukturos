@@ -65,4 +65,10 @@ public class Controller {
     public void removeEntity(EnemyEntity obj){
         Eent.remove(obj);
     }
+    public LinkedList<Entity> GetF(){
+        return ent;
+    }
+    public LinkedList<EnemyEntity> GetE(){
+        return Eent;
+    }
 }

@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class Game extends Canvas implements Runnable{
 
@@ -27,6 +28,9 @@ public class Game extends Canvas implements Runnable{
     private int enemyKilled = 0;
     private Controller controller;
     boolean isShooting = false;
+
+    public LinkedList<Entity> ent;
+    public LinkedList<EnemyEntity> Eent;
 
     private Textures tex;
 
@@ -63,6 +67,11 @@ public class Game extends Canvas implements Runnable{
         controller = new Controller(tex);
 
         controller.createEnemy(11);
+
+        ent = controller.GetF();
+        Eent = controller.GetE();
+
+//        controller.createEnemy(11);
     }
 
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
@@ -173,7 +182,7 @@ public class Game extends Canvas implements Runnable{
             case KeyEvent.VK_DOWN:player.setVelY(3);break;
             case KeyEvent.VK_Z:
                 if(!isShooting)
-                    controller.addEntity(new Laser(player.getX(), player.getY(), tex));
+                    controller.addEntity(new Laser(player.getX(), player.getY(), tex, this));
                 isShooting = true;
                 break;
 //            case KeyEvent.VK_Q:enemy=new Enemy(20,20,tex);break;

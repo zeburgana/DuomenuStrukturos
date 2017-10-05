@@ -8,6 +8,7 @@ import java.awt.*;
 public interface Entity{
     void tick();
     void render(Graphics g);
+    public Rectangle getBounds();
 
     double getX();
     double getY();
