@@ -11,16 +11,21 @@ public class Laser extends GameObj implements Entity {
 //    private double y;
 
     private Textures tex;
+    private Game game;
 
-    public Laser(double x, double y, Textures tex) {
+    public Laser(double x, double y, Textures tex, Game game) {
 //        this.x = x;
 //        this.y = y;
         super(x,y);
         this.tex = tex;
+        this.game = game;
     }
 
     public void tick() {
         y -= 10;
+        if(Physx.Collision(this, game.Eent)){
+            System.out.println("Collision");
+        }
     }
 
     public void render(Graphics g) {
@@ -34,6 +39,10 @@ public class Laser extends GameObj implements Entity {
     public double getY() {
         return y;
     }
+    public Rectangle getBounds(){
+        return new Rectangle((int)x+16, (int)y+14, 2, 18);
+    }
+
 
 //    public double GetY() {
 //        return y;

@@ -49,4 +49,8 @@ public class Enemy extends GameObj implements EnemyEntity {
     public double getY() {
         return y;
     }
+    public Rectangle getBounds(){
+        return new Rectangle((int)x, (int)y, 32, 32);
+    }
+
 }
