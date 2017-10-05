@@ -2,61 +2,67 @@ package com.game.src.main;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * Created by Pug b0iiiii on 2017-10-02.
  */
 public class Controller {
-    private LinkedList<Laser> lasers = new LinkedList<>();
-    private LinkedList<Enemy> enemies = new LinkedList<>();
+    private LinkedList<Entity> ent = new LinkedList<Entity>();
+    private LinkedList<EnemyEntity> Eent = new LinkedList<EnemyEntity>();
 
-    Laser temp;
-    Enemy Etemp;
+    Entity e;
+    EnemyEntity Ee;
+    Textures textures;
+//    Random r = new Random();      //random spawnpoint experimentation
 
-    Game game;
-    Textures tex;
+    public Controller(Textures tex){
+        textures = tex;
+    }
 
-    public Controller(Game game, Textures tex){
-        this.game = game;
-        this.tex = tex;
-
-        for(int x =30;x<(Game.WIDTH *Game.SCALE);x+=80){
-            addEnemy(new Enemy(x,0,tex, game));
+    public void createEnemy(int EnemyCount){
+        for(int i = 0; i < EnemyCount; i++){
+            if(i<=8)
+                addEntity(new Enemy(i*64,0, textures));//r.nextInt(Game.WIDTH)
+            if(i>8&&i<=18)
+                addEntity(new Enemy(Game.WIDTH*Game.SCALE-(i-7)*64,32, textures));
         }
     }
 
-    public void tick(){
-        for(int i = 0;i<lasers.size();i++){
-            temp = lasers.get(i);
-            if(temp.GetY()<=1)
-                removeLaser(temp);
-            temp.tick();
+    public void tick() {
+        //friendly entities
+        for (int i = 0; i < ent.size(); i++) {
+            e = ent.get(i);
+            e.tick();
         }
-        for(int i = 0;i<enemies.size();i++){
-            Etemp = enemies.get(i);
-            Etemp.tick();
+        //enemy entities
+        for (int i = 0; i < Eent.size(); i++) {
+            Ee = Eent.get(i);
+            Ee.tick();
         }
     }
     public void render(Graphics g){
-        for(int i = 0;i<lasers.size();i++){
-            temp = lasers.get(i);
-            temp.render(g);
+        //friendly entities
+        for (int i = 0; i< ent.size(); i++){
+            e = ent.get(i);
+            e.render(g);
         }
-        for(int i = 0;i<enemies.size();i++){
-            Etemp = enemies.get(i);
-            Etemp.render(g);
+        //enemy entities
+        for (int i = 0; i< Eent.size(); i++){
+            Ee = Eent.get(i);
+            Ee.render(g);
         }
     }
-    public void addLaser(Laser laser){
-        lasers.add(laser);
+    public void addEntity(Entity obj){
+        ent.add(obj);
     }
-    public void removeLaser(Laser laser){
-        lasers.remove(laser);
+    public void removeEntity(Entity obj){
+        ent.remove(obj);
     }
-    public void addEnemy(Enemy enemy){
-        enemies.add(enemy);
+    public void addEntity(EnemyEntity obj){
+        Eent.add(obj);
     }
-    public void removeEnemy(Enemy enemy){
-        enemies.remove(enemy);
+    public void removeEntity(EnemyEntity obj){
+        Eent.remove(obj);
     }
 }

@@ -23,7 +23,8 @@ public class Game extends Canvas implements Runnable{
     private BufferedImage background = null;
 
     private Player player;
-    private Enemy enemy;
+    private int enemyCount = 5;
+    private int enemyKilled = 0;
     private Controller controller;
     boolean isShooting = false;
 
@@ -51,16 +52,17 @@ public class Game extends Canvas implements Runnable{
         requestFocus();
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("C:\\Users\\LapDawg\\Desktop\\DuomenuStrukturos\\Game\\res/SpriteSheet.png");
-            background = loader.loadImage("C:\\Users\\LapDawg\\Desktop\\DuomenuStrukturos\\Game\\res/BackGround.png");
+            spriteSheet = loader.loadImage("C:\\Users\\Pug b0iiiii\\IdeaProjects\\Game\\res/SpriteSheet.png");
+            background = loader.loadImage("C:\\Users\\Pug b0iiiii\\IdeaProjects\\Game\\res/Background.png");
         }catch(IOException e){
             e.printStackTrace();
         }
         tex = new Textures(this);
         addKeyListener(new KeyInput(this));
-        player = new Player(200,200, tex, this);
-        //enemy=new Enemy(20,20,tex);
-        controller = new Controller(this, tex);
+        player = new Player(WIDTH*SCALE/2,HEIGHT*SCALE-25, tex);
+        controller = new Controller(tex);
+
+        controller.createEnemy(11);
     }
 
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
@@ -119,7 +121,6 @@ public class Game extends Canvas implements Runnable{
     private void tick(){
         player.tick();
         controller.tick();
-//        enemy.tick();
     }
 
     private void render(){
@@ -142,6 +143,22 @@ public class Game extends Canvas implements Runnable{
         bs.show();
     }
 
+    public int getEnemyCount() {
+        return enemyCount;
+    }
+
+    public void setEnemyCount(int enemyCount) {
+        this.enemyCount = enemyCount;
+    }
+
+    public int getEnemyKilled() {
+        return enemyKilled;
+    }
+
+    public void setEnemyKilled(int enemyKilled) {
+        this.enemyKilled = enemyKilled;
+    }
+
     public BufferedImage getSpriteSheet(){
         return spriteSheet;
     }
@@ -156,7 +173,7 @@ public class Game extends Canvas implements Runnable{
             case KeyEvent.VK_DOWN:player.setVelY(3);break;
             case KeyEvent.VK_Z:
                 if(!isShooting)
-                    controller.addLaser(new Laser(player.getX(), player.getY(), tex));
+                    controller.addEntity(new Laser(player.getX(), player.getY(), tex));
                 isShooting = true;
                 break;
 //            case KeyEvent.VK_Q:enemy=new Enemy(20,20,tex);break;

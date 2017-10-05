@@ -6,25 +6,19 @@ import java.awt.image.BufferedImage;
 /**
  * Created by Pug b0iiiii on 2017-10-02.
  */
-public class Player {
+public class Player extends GameObj implements Entity {
 
     private double velX = 0;
     private double velY = 0;
 
-    private double x;
-    private double y;       //y is flipped
+//    private double x;
+//    private double y;       //y is flipped
 
     private Textures tex;
 
-    int HEIGHT, WIDTH, SCALE;
-
-    public Player(double x, double y, Textures tex, Game game){
-        this.x = x;
-        this.y = y;
+    public Player(double x, double y, Textures tex){
+        super(x,y);
         this.tex = tex;
-        HEIGHT = game.HEIGHT;
-        WIDTH = game.WIDTH;
-        SCALE = game.SCALE;
     }
 
     public double getX(){
@@ -58,12 +52,12 @@ public class Player {
         y+=velY;
         if(x <= 0)
             x = 0;
-        if(x >= (WIDTH*SCALE)-20)
-            x = (WIDTH*SCALE)-20;
+        if(x >= (Game.WIDTH*Game.SCALE)-20)
+            x = (Game.WIDTH*Game.SCALE)-20;
         if(y <= 0)
             y = 0;
-        if(y >= (HEIGHT*SCALE)-24)
-            y = (HEIGHT*SCALE)-24;
+        if(y >= (Game.HEIGHT*Game.SCALE)-24)
+            y = (Game.HEIGHT*Game.SCALE)-24;
     }
     public void render(Graphics g){
         g.drawImage(tex.player, ((int) x),((int) y),null);
