@@ -32,6 +32,8 @@ public class Game extends Canvas implements Runnable{
     public LinkedList<Entity> ent;
     public LinkedList<EnemyEntity> Eent;
 
+    public static String directory = System.getProperty("user.dir");
+
     private Textures tex;
 
     public static void main(String[] args) {
@@ -49,6 +51,8 @@ public class Game extends Canvas implements Runnable{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        System.out.println(directory);
+
         game.start();
     }
 
@@ -56,8 +60,8 @@ public class Game extends Canvas implements Runnable{
         requestFocus();
         BufferedImageLoader loader = new BufferedImageLoader();
         try{
-            spriteSheet = loader.loadImage("C:\\Users\\Pug b0iiiii\\IdeaProjects\\Game\\res/SpriteSheet.png");
-            background = loader.loadImage("C:\\Users\\Pug b0iiiii\\IdeaProjects\\Game\\res/Background.png");
+            spriteSheet = loader.loadImage(directory + "/Game/res/SpriteSheet.png");
+            background = loader.loadImage(directory + "/Game/res/Background.png");
         }catch(IOException e){
             e.printStackTrace();
         }
