@@ -12,7 +12,6 @@ public class BufferedImageLoader {
 
     private BufferedImage image = null;
     public BufferedImage loadImage(String path) throws IOException{
-        System.out.println(path);
         image = ImageIO.read(new File(path));
         return image;
     }
