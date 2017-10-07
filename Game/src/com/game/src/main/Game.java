@@ -51,8 +51,6 @@ public class Game extends Canvas implements Runnable{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        System.out.println(directory);
-
         game.start();
     }
 
